@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMITRY BIVOL | Contacto</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: radial-gradient(circle at 50% 50%, #221e1a 0%, #0d0b0a 100%); color: #d1c7bd; font-family: 'Segoe UI', sans-serif; }
+        header { background: rgba(15, 13, 11, 0.95); border-bottom: 2px solid #3d3122; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo-title { font-size: 24px; color: #f1ebd9; font-weight: bold; text-decoration: none; }
+        nav a { color: #bfa15f; text-decoration: none; margin-left: 15px; font-weight: 600; text-transform: uppercase; font-size: 14px; }
+        nav a.active { color: #fff; border-bottom: 2px solid #bfa15f; padding-bottom: 3px; }
+        .contact-container { max-width: 600px; margin: 40px auto; padding: 25px; background: rgba(26, 22, 18, 0.85); border: 2px solid #3d3122; border-radius: 4px; }
+        h1 { color: #f1ebd9; text-align: center; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; color: #d4af37; margin-bottom: 5px; font-size: 14px; }
+        input, textarea { width: 100%; padding: 10px; background: #110e0c; border: 1px solid #4a3a25; color: #fff; border-radius: 4px; }
+        button { width: 100%; padding: 12px; background: #2b2318; color: #bfa15f; border: 2px solid #bfa15f; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        button:hover { background: #bfa15f; color: #12100e; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 2px solid #2b2318; color: #776e62; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-title">DMITRY BIVOL</a>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="biografia.html">Biografía</a>
+            <a href="carrera.html">Carrera</a>
+            <a href="galerias.html">Galerías</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="contacto.html" class="active">Contacto</a>
+        </nav>
+    </header>
+    <div class="contact-container">
+        <h1>CONTACTO</h1>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" required placeholder="Tu nombre...">
+            </div>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" required placeholder="tu@email.com">
+            </div>
+            <div class="form-group">
+                <label>Mensaje</label>
+                <textarea rows="5" required placeholder="Escribe tu mensaje..."></textarea>
+            </div>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </div>
+    <footer>&copy; 2026 Dmitry Bivol Official Fan Site</footer>
+</body>
+</html>
