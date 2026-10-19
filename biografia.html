@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMITRY BIVOL | Biografía Oficial</title>
+    
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0a0c10;
+            --bg-card: rgba(16, 20, 28, 0.75);
+            --accent-cyan: #00f0ff;
+            --accent-gold: #d4af37;
+            --text-light: #f0f4f8;
+            --text-muted: #8892b0;
+            --font-head: 'Oswald', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            font-family: var(--font-head);
+            font-size: 20vw;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.015);
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            z-index: -1;
+            text-transform: uppercase;
+        }
+
+        .browser-bar {
+            background: #06080b;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 11px;
+            color: #555;
+            z-index: 1001;
+            position: relative;
+        }
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .browser-dots span {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+        .browser-url {
+            background: #11151c;
+            padding: 4px 18px;
+            border-radius: 20px;
+            color: var(--accent-cyan);
+            margin-left: 20px;
+            flex-grow: 1;
+            max-width: 450px;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        header {
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .db-badge {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), #006688);
+            color: #000;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+        }
+        .brand-title {
+            font-family: var(--font-head);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .brand-title span {
+            color: var(--accent-cyan);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-sub);
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #fff;
+        }
+
+        nav a.active::after, nav a:hover::after {
+            width: 100%;
+        }
+
+        .page-hero {
+            padding: 60px 6% 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-tag {
+            font-family: var(--font-sub);
+            color: var(--accent-cyan);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .page-title {
+            font-family: var(--font-head);
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .page-title span {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--accent-cyan);
+        }
+
+        .header-line {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), transparent);
+            margin-top: 15px;
+        }
+
+        .bio-wrapper {
+            max-width: 1200px;
+            margin: 30px auto 80px;
+            padding: 0 6%;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .bio-chapters {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .chapter-block {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 35px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-block:hover {
+            transform: translateX(6px);
+        }
+
+        .chapter-num {
+            font-family: var(--font-head);
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(0, 240, 255, 0.2);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            line-height: 1;
+        }
+
+        .chapter-title {
+            font-family: var(--font-head);
+            font-size: 26px;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chapter-title i {
+            color: var(--accent-gold);
+            font-size: 18px;
+        }
+
+        .chapter-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .bio-sidebar {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-img-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .img-frame-hex {
+            width: 100%;
+            height: 380px;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+            border-left: 3px solid var(--accent-cyan);
+            border-right: 3px solid var(--accent-gold);
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 15px;
+        }
+
+        .img-frame-hex img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) brightness(0.95);
+            transition: transform 0.5s ease;
+        }
+
+        .sidebar-img-card:hover .img-frame-hex img {
+            transform: scale(1.05);
+        }
+
+        .sidebar-caption {
+            font-family: var(--font-sub);
+            font-size: 13px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .quick-facts-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quick-facts-box h3 {
+            font-family: var(--font-head);
+            font-size: 20px;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        .fact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fact-list li {
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+        }
+
+        .fact-list strong {
+            color: #fff;
+            font-family: var(--font-sub);
+            text-transform: uppercase;
+        }
+
+        .fact-list span {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        footer {
+            background: #040507;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 50px 6% 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* RESPONSIVO MÓVIL OPTIMIZADO CON NAVEGACIÓN DESLIZABLE */
+        @media (max-width: 992px) {
+            .bio-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .bio-sidebar {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 4%;
+            }
+
+            nav {
+                width: 100%;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            nav ul {
+                display: flex !important;
+                gap: 10px;
+                justify-content: flex-start;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 6px 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 4px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="bg-watermark">BIOGRAPHY</div>
+
+    <div class="browser-bar">
+        <div class="browser-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+        </div>
+        <div class="browser-url">https://www.dmitrybivol-fanclub.com/biografia.html</div>
+    </div>
+
+    <header>
+        <a href="index.html" class="brand-logo">
+            <div class="db-badge">DB</div>
+            <div class="brand-title">Dmitry <span>Bivol</span></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="biografia.html" class="active">Biografía</a></li>
+                <li><a href="carrera.html">Carrera</a></li>
+                <li><a href="galerias.html">Galerías</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <span class="page-tag"><i class="fa-solid fa-user-ninja"></i> Historia de Vida</span>
+        <h1 class="page-title">Biografía de <span>Dmitry Bivol</span></h1>
+        <div class="header-line"></div>
+    </section>
+
+    <main class="bio-wrapper">
+        
+        <div class="bio-chapters">
+            
+            <article class="chapter-block">
+                <span class="chapter-num">01</span>
+                <h2 class="chapter-title"><i class="fa-solid fa-globe"></i> Raíces y Primeros Años</h2>
+                <p class="chapter-text">
+                    Dmitry Bivol nació el 18 de diciembre de 1990 en Tokmok, Kirguistán. Hijo de un padre moldavo y una madre de ascendencia coreana, creció en un entorno multicultural que moldeó su carácter sereno y disciplinado. Inspirado por las artes marciales y el deseo de superación, comenzó a entrenar boxeo a la temprana edad de 6 años.
+                </p>
+            </article>
+
+            <article class="chapter-block">
+                <span class="chapter-num">02</span>
+                <h2 class="chapter-title"><i class="fa-solid fa-medal"></i> Mudanza a Rusia y Éxito Amateur</h2>
+                <p class="chapter-text">
+                    A los 11 años se mudó con su familia a San Petersburgo, Rusia, ciudad que se convertiría en su hogar definitivo y centro de desarrollo pugilístico. Bajo la tutela de entrenadores de la escuela soviética, realizó más de 250 peleas amateurs, acumulando múltiples títulos juveniles nacionales e internacionales antes de dar el salto al profesionalismo con un estilo pulido e imbatible.
+                </p>
+            </article>
+
+        </div>
+
+        <aside class="bio-sidebar">
+            
+            <div class="sidebar-img-card">
+                <div class="img-frame-hex">
+                    <img src="imgs/dimij.jpg" alt="Dmitry Bivol Etapa Juvenil">
+                </div>
+                <span class="sidebar-caption">Primeros Pasos en el Boxeo</span>
+            </div>
+
+            <div class="quick-facts-box">
+                <h3>Perfil Rápido</h3>
+                <ul class="fact-list">
+                    <li><strong>Nacimiento:</strong> <span>18 Dic, 1990</span></li>
+                    <li><strong>Origen:</strong> <span>Tokmok, Kirguistán</span></li>
+                    <li><strong>Nacionalidad:</strong> <span>Rusa</span></li>
+                    <li><strong>Base de Entrenamiento:</strong> <span>San Petersburgo</span></li>
+                    <li><strong>Récord Amateur:</strong> <span>268-15</span></li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="brand-title">Dmitry <span>Bivol</span></div>
+            <div class="social-links">
+                <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Dmitry Bivol Official Fan Site | Todos los Derechos Reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = 35;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.5,
+                color: Math.random() > 0.5 ? 'rgba(0, 240, 255, ' : 'rgba(212, 175, 55, ',
+                alpha: Math.random() * 0.5 + 0.1,
+                speedY: -Math.random() * 0.4 - 0.1,
+                speedX: (Math.random() - 0.5) * 0.3
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + p.alpha + ')';
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+    </script>
+</body>
+</html>
