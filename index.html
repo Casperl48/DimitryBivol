@@ -786,13 +786,10 @@
 </head>
 <body>
 
-    <!-- Canvas para Partículas Interactivas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Marca de Agua / Watermark de Fondo -->
     <div class="bg-watermark">BIVOL 22-0</div>
 
-    <!-- Barra simulada de navegador -->
     <div class="browser-bar">
         <div class="browser-dots">
             <span class="dot-red"></span>
@@ -802,7 +799,6 @@
         <div class="browser-url">https://www.dmitrybivol-fanclub.com</div>
     </div>
 
-    <!-- Header / Menú Superior -->
     <header>
         <a href="index.html" class="brand-logo">
             <div class="db-badge">DB</div>
@@ -820,7 +816,6 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION EDITORIAL -->
     <section class="hero" id="inicio">
         <div class="hero-layout">
             <div class="hero-caption">
@@ -852,20 +847,16 @@
             
             <div class="hero-media">
                 <div class="hero-img-wrapper">
-                    <!-- Foto principal -->
                     <img src="imgs/dimi.jpg" alt="Dmitry Bivol Campeón">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <main class="main-wrapper">
 
-        <!-- BIOGRAFÍA & ANÁLISIS TÁCTICO -->
         <section class="bio-tactical-grid" id="biografia">
             
-            <!-- Tarjeta de Biografía -->
             <div class="bio-card-modern">
                 <div class="section-header">
                     <span class="section-subtitle">Orígenes & Raíces</span>
@@ -894,7 +885,6 @@
                 </div>
             </div>
 
-            <!-- Panel Táctico / Tale of the Tape con Tabs -->
             <div class="tactical-panel" id="tactico">
                 <div class="section-header">
                     <span class="section-subtitle">Perfil Técnico</span>
@@ -907,7 +897,6 @@
                     <button class="tab-btn" onclick="switchTab('tab-data')">Datos Físicos</button>
                 </div>
 
-                <!-- Tab 1: Atributos Tácticos -->
                 <div id="tab-stats" class="tab-content active">
                     <div class="skill-bar-item">
                         <div class="skill-info">
@@ -942,7 +931,6 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Datos Físicos -->
                 <div id="tab-data" class="tab-content">
                     <ul class="key-data-list">
                         <li>
@@ -976,7 +964,6 @@
 
         </section>
 
-        <!-- GALERÍA DE MOMENTOS -->
         <section id="galeria">
             <div class="section-header">
                 <span class="section-subtitle">Colección Visual</span>
@@ -1004,7 +991,6 @@
             </div>
         </section>
 
-        <!-- CARRERA PROFESIONAL Y HITOS -->
         <section id="carrera">
             <div class="section-header">
                 <span class="section-subtitle">Trayectoria Profesional</span>
@@ -1046,16 +1032,15 @@
         <div class="footer-content">
             <div class="brand-title">Dmitry <span>Bivol</span></div>
             <div class="social-links">
-                <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/dmitry.bivol/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/bivol_d/" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.twitter.com/bivol_d" target="_blank" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.youtube.com/@DmitryBivol" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
             </div>
-            <p class="footer-copy">&copy; 2026 Dmitry Bivol Official Fan Site | Todos los Derechos Reservados</p>
+            <p class="footer-copy">&copy; 2026 Dmitry Bivol Official Fan Site | Todos los derechos para Amauri Jiménez Barrera</p>
         </div>
     </footer>
 
-    <!-- LIGHTBOX MODAL -->
     <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-content">
@@ -1063,9 +1048,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT INTERACTIVO -->
     <script>
-        // Lógica de Tabs
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -1074,7 +1057,6 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Lógica de Lightbox
         function openLightbox(src) {
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
@@ -1086,7 +1068,6 @@
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        // Canvas Animado de Partículas de Luz
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
